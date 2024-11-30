@@ -3,7 +3,6 @@ import { Slider } from '@mui/material';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 import { styled } from '@mui/material/styles';
-import radioAtlas from '../../src/Atlas-Radio.wav'
 
 function AudioPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
