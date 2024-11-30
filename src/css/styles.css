@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Didact+Gothic&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+body {
+    background-color: #fff7c9;
+    color: whitesmoke;
+    font-family: "Didact Gothic", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+.theo-title {
+  font-family: "Raleway", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+}
+
+
+.raleway-400 {
+  font-family: "Raleway", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+@media (min-width: 1024px) {
+  .lg-hidden {
+    display: none !important;
+  }
+}
+
+
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.vjs-custom-text {
+  position: absolute;
+  top: 10px; /* Adjust as necessary */
+  right: 10px; /* Adjust as necessary */
+  background: rgba(0, 0, 0, 0.501); /* Optional: add background for readability */
+  color: #ffffff7c;
+  padding: 5px 10px;
+  border-radius: 5px;
+  z-index: 10; /* Ensure it is above other components */
+  pointer-events: none; /* Ensure it doesn't block video controls */
+}

@@ -1,0 +1,93 @@
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+.nav-bar-up {
+  
+  transition: transform 0.5s ease; 
+}
+
+.nav-bar-down {
+  transform: translateY(-90%); 
+  transition: transform 0.5s ease; 
+}
+
+.nav-bar-down:hover {
+  transform: translateY(0%); 
+}
+
+
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+
+
+@keyframes ticker-animation {
+  0% {
+    transform: translateX(50%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes ticker-animation-mobile {
+  0% {
+    transform: translateX(20%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.slide-none {
+  padding-top: 30px;
+  padding-bottom: 5px;
+  transition: padding-top 0.3s ease-in-out;
+}
+
+.slide-none {
+  padding-top: 40px;
+  padding-bottom: 20px;
+  transition: padding-top 0.3s ease-in-out;
+}
+
+.slide-down {
+  
+  padding-top: 65px;
+  padding-bottom: 20px;
+
+  transition: padding-top 0.3s ease-in-out;
+}
+
+.animate-ticker-mobile {
+  display: inline-block;
+  white-space: nowrap;
+  animation: ticker-animation-mobile 60s linear infinite;
+}
+
+.animate-ticker {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: ticker-animation 10s linear infinite;
+}
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
