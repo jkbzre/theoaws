@@ -2,6 +2,7 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link, Navigate } from 'react-router-dom';
+import Adieu from './components/Adieu.js';
 
 import './css/styles.css'
 
@@ -218,7 +219,7 @@ function App() {
             
             <Route path='/videos/:urlType/:urlVideo?' element={<Videos setShowMainSection={setShowMainSection}  handlePhotography={handlePhotography} handleContentChange={handleContentChange} handleVideoInstallations={handleVideoInstallations}  handleEssayFilms={handleEssayFilms} handleSingleChannel={handleSingleChannel} setSelectedVideo={setSelectedVideo} selectedVideo={selectedVideo}  setShowNavBar={setShowNavBar} setFadeOut={setFadeOut} handleTheoClick={handleTheoClick}/>} />
             <Route path='/photography/:urlAlbum?' element={<NewPhotography />}></Route>
-
+            <Route path='/adieu' element={<Adieu />}></Route>   
         
         </Routes>
         </Router>
