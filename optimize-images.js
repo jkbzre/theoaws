@@ -5,7 +5,9 @@ const sharp = require('sharp');
 const fs = require('fs');
 const path = require('path');
 
-const thumbnailsDir = path.join(__dirname, 'public', 'thumbnails');
+// Can pass directory as argument: node optimize-images.js "C:\path\to\folder"
+const targetDir = process.argv[2] || path.join(__dirname, 'public', 'thumbnails');
+const thumbnailsDir = targetDir;
 const sizes = [400, 800, 1200];
 
 async function optimizeImage(filePath) {
