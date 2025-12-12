@@ -34,14 +34,17 @@ const OptimizedImage = ({
     ...props 
 }) => {
     const [isLoaded, setIsLoaded] = useState(false);
-    const [currentSrc, setCurrentSrc] = useState(blurDataURL || src);
+    // Normalize to HTTPS to avoid mixed-content blocking
+    const normalizeToHttps = (url) => (typeof url === 'string' ? url.replace(/^http:\/\//i, 'https://') : url);
+    const normalizedSrc = normalizeToHttps(src);
+    const [currentSrc, setCurrentSrc] = useState(blurDataURL || normalizedSrc);
 
     // Auto-detect WebP version if available
-    const webpSrc = src.replace(/\.(jpg|jpeg|png)$/i, '.webp');
+    const webpSrc = normalizedSrc.replace(/\.(jpg|jpeg|png)$/i, '.webp');
     
     // Auto-generate srcSet from src if not provided
-    const autoSrcSet = !srcSet && src.match(/\.(jpg|jpeg|png)$/i) 
-        ? `${src.replace(/\.(jpg|jpeg|png)$/i, '.400.$1')} 400w, ${src.replace(/\.(jpg|jpeg|png)$/i, '.800.$1')} 800w, ${src.replace(/\.(jpg|jpeg|png)$/i, '.1200.$1')} 1200w`
+    const autoSrcSet = !srcSet && normalizedSrc.match(/\.(jpg|jpeg|png)$/i) 
+        ? `${normalizedSrc.replace(/\.(jpg|jpeg|png)$/i, '.400.$1')} 400w, ${normalizedSrc.replace(/\.(jpg|jpeg|png)$/i, '.800.$1')} 800w, ${normalizedSrc.replace(/\.(jpg|jpeg|png)$/i, '.1200.$1')} 1200w`
         : srcSet;
 
     useEffect(() => {
@@ -75,9 +78,9 @@ const OptimizedImage = ({
         img.onerror = () => {
             // Fallback to original src if WebP fails
             const fallbackImg = new Image();
-            fallbackImg.src = src;
+            fallbackImg.src = normalizedSrc;
             fallbackImg.onload = () => {
-                setCurrentSrc(src);
+                setCurrentSrc(normalizedSrc);
                 setIsLoaded(true);
             };
         };
@@ -87,7 +90,7 @@ const OptimizedImage = ({
             setCurrentSrc(webpSrc);
             setIsLoaded(true);
         }
-    }, [src, webpSrc]);
+    }, [normalizedSrc, webpSrc]);
 
     const imageStyles = {
         transition: 'filter 0.3s ease-out, opacity 0.3s ease-out',
