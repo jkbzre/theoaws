@@ -35,12 +35,18 @@ async function optimizeImage(filePath) {
     fs.writeFileSync(`${filePath}.base64.txt`, base64);
     console.log(`  ✓ Created blur placeholder`);
 
-    // 3. Generate responsive sizes
+    // 3. Generate responsive sizes (both original format and WebP)
     for (const size of sizes) {
+      // Original format
       await sharp(filePath)
         .resize(size, null, { withoutEnlargement: true })
         .toFile(path.join(dir, `${baseName}.${size}${ext}`));
-      console.log(`  ✓ Created ${size}px version`);
+      // WebP format
+      await sharp(filePath)
+        .resize(size, null, { withoutEnlargement: true })
+        .webp({ quality: 80 })
+        .toFile(path.join(dir, `${baseName}.${size}.webp`));
+      console.log(`  ✓ Created ${size}px versions (${ext} + webp)`);
     }
   } catch (error) {
     console.error(`  ✗ Error processing ${fileName}:`, error.message);
