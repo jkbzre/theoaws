@@ -2,6 +2,7 @@
 import { Link, useParams } from "react-router-dom"
 import { useEffect, useState, useMemo } from "react";
 import Articles from "../Articles";
+import OptimizedImage from "../OptimizedImage";
 
 
 const NewPhotography = () => {
@@ -70,7 +71,7 @@ const NewPhotography = () => {
                     <>
                     <Link to={`/photography/${album.id}`}>
                         <div  className="relative group hover:opacity-100 pb-10   transition-opacity duration-300 cursor-pointer ">
-                            <img src={album.img} alt={album.text} />
+                            <OptimizedImage src={album.img} alt={album.text} width={400} height={400} priority={true} />
                             <p className="mt-2 raleway-400 text-xs lg:text-sm">{album.text}</p>
                             <p className='text-xs'>{album.year}</p>
                         </div>

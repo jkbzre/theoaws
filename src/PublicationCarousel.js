@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import OptimizedImage from './components/OptimizedImage';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -73,14 +74,14 @@ const PublicationsCarousel = () => {
           {index === currentSlide ? (
             <div className=''>
             <a href={publication.link}>
-              <img src={publication.image} alt={publication.title} className="lg:max-w-[25rem] lg:pt-0 pt-0  mx-auto drop-shadow-md" style={{...slideStyles[index]}} />
+              <OptimizedImage src={publication.image} alt={publication.title} className="lg:max-w-[25rem] lg:pt-0 pt-0  mx-auto drop-shadow-md" style={{...slideStyles[index]}} width={400} height={600} priority={index === currentSlide} />
             </a>
             </div>
           ) : (
 
             
             <div onClick={() => sliderRef.current && sliderRef.current.slickGoTo(index)} className="flex items-center justify-center lg:pt-32 pt-16 ">
-                <img src={publication.image} alt={publication.title} className="lg:max-w-[8rem]  opacity-50 hover:opacity-80 max-w-[4rem] mx-auto drop-shadow-md" />
+                <OptimizedImage src={publication.image} alt={publication.title} className="lg:max-w-[8rem]  opacity-50 hover:opacity-80 max-w-[4rem] mx-auto drop-shadow-md" width={128} height={192} />
                 
             </div>
 

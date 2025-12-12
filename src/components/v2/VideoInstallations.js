@@ -2,6 +2,7 @@ import { useState } from "react"
 import videoDataByType from "../../data/videoData"
 import PlayVideo from "../PlayVideo"
 import { Link } from "react-router-dom"
+import OptimizedImage from "../OptimizedImage";
 
 const VideoInstallations = ({categoryType, categoryName}) => {
     
@@ -26,7 +27,7 @@ const VideoInstallations = ({categoryType, categoryName}) => {
                             <>
                             <Link to={`videos/${categoryType}/${video.id}`} key={video.id}>
                             <div key={video.src}  className="relative pb-10 group hover:opacity-100    transition-opacity duration-300 cursor-pointer ">
-                                <img src={video.thumbnail} alt={video.title} />
+                                <OptimizedImage src={video.thumbnail} alt={video.title} width={400} height={300} />
                                 <p className="mt-2 raleway-400 text-xs lg:text-sm">{video.title}</p>
                                 <p className='text-xs'>{video.year}</p>
                             </div>

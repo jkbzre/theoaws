@@ -1,6 +1,7 @@
 // Navigation.js
 
 import React, {useEffect, useMemo, useState} from 'react';
+import OptimizedImage from './OptimizedImage';
 import PlayVideo from './PlayVideo';
 import videoDataByType from '../data/videoData';
 
@@ -58,6 +59,10 @@ const Navigation = ( { className, hoveredTitle, setHoveredTitle, handleVideoInst
             {showVideo !== null &&
             <div className='relative '>
                 <div className={` px-4 sm:px-8 md:px-16 lg:px-72 2xl:px-32  -80 pb-10 top-0 bg-[#fcfcfc] z-50`}>
+                    {/* Example usage: */}
+                    {thumbnailId.map((thumb, idx) => (
+                        <OptimizedImage key={thumb} src={thumb} alt={titles[idx]} width={200} height={120} />
+                    ))}
                     <div className={`sticky ${isSlideDown ? 'slide-down ' : 'slide-none lg:slide-none-pc'} navbar z-10 bg-[#fcfcfc]  bg-opacity-90   top-0`}>
                         <div className={` flex justify-between lg:justify-normal sm:mx-auto  `}>
                                 <div className='firstdiv'>
