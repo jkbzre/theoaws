@@ -1,21 +1,15 @@
-import { Dropdown } from "flowbite-react"
-import { Link, useParams } from "react-router-dom"
-import { useCallback, useEffect, useRef, useState } from "react";
-import Navigation from "./Navigation";
+import React, { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import NavBar from "./NavBar";
-import VideoInstallations from "./v2/VideoInstallations"
-import Photography from "./Photography";
-import NewPhotography from "./v2/NewPhotography";
-import Resume from "./v2/Resume";
-import PublicationsCarousel from "../PublicationCarousel";
-import Contact from "./v2/Contact";
+import LazyMount from "./LazyMount";
+
+const VideoInstallations = React.lazy(() => import("./v2/VideoInstallations"));
+const NewPhotography = React.lazy(() => import("./v2/NewPhotography"));
+const Resume = React.lazy(() => import("./v2/Resume"));
+const PublicationsCarousel = React.lazy(() => import("../PublicationCarousel"));
+const Contact = React.lazy(() => import("./v2/Contact"));
 
 
-function MainSection ({ showMainSection}) {
-
-    const [categoryFound, setCategoryFound] = useState(false);
-    const [hoveredTitle, setHoveredTitle] = useState(null);    
-    const [isFeatured, setIsFeatured] = useState(false);
+function MainSection () {
 
     const installationsRef = useRef(null);
     const essayRef = useRef(null);
@@ -34,9 +28,7 @@ function MainSection ({ showMainSection}) {
 
     useEffect(() => {
         const hash = window.location.hash.slice(1);
-        console.log(hash)
         const element = document.getElementById(hash)
-        console.log(element)
 
         if(element) {
             element.scrollIntoView({behavior: "smooth"});
@@ -50,10 +42,8 @@ function MainSection ({ showMainSection}) {
             entries.forEach((entry) => {
                 if(entry.isIntersecting) {
                     setVisibleSection(entry.target.getAttribute("id"));
-                    console.log("section: ",entry.target.getAttribute("id").toString())
 
                 }
-                console.log("visiblesection: ", visibleSection)
             })
         }, options);
 
@@ -70,19 +60,12 @@ function MainSection ({ showMainSection}) {
     }, []);
 
 
-    useEffect(() => {
-        setCategoryFound("featured");
-
-    }, [])
-
     const menus = ["Featured", "Video Installations", "Essay Films", "Single Channel", "Photography", "Resume", "Publications", "Contact"]
     
     const [visibleSection, setVisibleSection] = useState(menus[0]);
 
     return(
     <>
-    {showMainSection &&(
-
     <div className={``}>
     <div className={`relative h-screen section  `} >
 
@@ -152,7 +135,13 @@ function MainSection ({ showMainSection}) {
 
                 </div>
 
-                <VideoInstallations categoryName="Video Installations" categoryType="installations"/>
+                <LazyMount minHeight={1400}>
+                    {() => (
+                        <Suspense fallback={null}>
+                            <VideoInstallations categoryName="Video Installations" categoryType="installations" />
+                        </Suspense>
+                    )}
+                </LazyMount>
             </section>
             </div>
 
@@ -167,7 +156,13 @@ function MainSection ({ showMainSection}) {
                     <span className='theo-title  text-center justify-center text-4xl cursor-default  uppercase '>Essay Films</span>
                     </div>
                 </div>
-                <VideoInstallations categoryName="Essay Films" categoryType="essay"/>
+                <LazyMount minHeight={1400}>
+                    {() => (
+                        <Suspense fallback={null}>
+                            <VideoInstallations categoryName="Essay Films" categoryType="essay" />
+                        </Suspense>
+                    )}
+                </LazyMount>
             </section>
             </div>
 
@@ -182,7 +177,13 @@ function MainSection ({ showMainSection}) {
                     <span className='theo-title  text-center justify-center text-4xl cursor-default  uppercase '>Single Channel</span>
                     </div>
                 </div>
-                <VideoInstallations categoryName="Single Channel" categoryType="single"/>
+                <LazyMount minHeight={1400}>
+                    {() => (
+                        <Suspense fallback={null}>
+                            <VideoInstallations categoryName="Single Channel" categoryType="single" />
+                        </Suspense>
+                    )}
+                </LazyMount>
             </section>
             </div>
 
@@ -200,13 +201,25 @@ function MainSection ({ showMainSection}) {
             </div>
 
             </div>
-                <NewPhotography />
+                <LazyMount minHeight={1200}>
+                    {() => (
+                        <Suspense fallback={null}>
+                            <NewPhotography />
+                        </Suspense>
+                    )}
+                </LazyMount>
             </section>
             </div>
 
             <div id="Resume" ref={refCallback}>
             <section ref={resumeRef} id="resume" className="sectionresume bg-black  text-white">
-                <Resume />
+                <LazyMount minHeight={800}>
+                    {() => (
+                        <Suspense fallback={null}>
+                            <Resume />
+                        </Suspense>
+                    )}
+                </LazyMount>
             </section>
             </div>
 
@@ -221,7 +234,13 @@ function MainSection ({ showMainSection}) {
                         <span className='theo-title  text-center justify-center  text-4xl  cursor-default  uppercase'>Publications</span>
                     </div>
                 </div>
-                <PublicationsCarousel />
+                <LazyMount minHeight={700}>
+                    {() => (
+                        <Suspense fallback={null}>
+                            <PublicationsCarousel />
+                        </Suspense>
+                    )}
+                </LazyMount>
             </section>
             </div>
 
@@ -234,7 +253,13 @@ function MainSection ({ showMainSection}) {
                 
                 <span className='theo-title  text-center justify-center text-[#fff7c9] text-4xl cursor-default pb-10 uppercase'>Contact</span>
             </div>
-                <Contact />
+                <LazyMount minHeight={700}>
+                    {() => (
+                        <Suspense fallback={null}>
+                            <Contact />
+                        </Suspense>
+                    )}
+                </LazyMount>
             </section>
             </div>
     </>
@@ -242,9 +267,8 @@ function MainSection ({ showMainSection}) {
 
     </div>
     </div>
-)}
 
-</>
+    </>
 
 )
 }

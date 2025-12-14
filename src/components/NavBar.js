@@ -1,26 +1,16 @@
 import React, { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
-import { Dropdown } from "flowbite-react"
 
 const NavBar = ({visibleSection, featuredRef, installationsRef, essayRef, singleRef, photoRef, resumeRef, publicationRef, contactRef}) => {
 
-    const [isFeatured, setIsFeatured] = useState(false);
-
     useEffect(() => {
-        handleClick(featuredRef);
-    }, [])
+        featuredRef?.current?.scrollIntoView({behavior: "smooth"});
+    }, [featuredRef]);
 
     const handleClick = (type) => {
+        if(!type?.current) return;
         type.current.scrollIntoView({behavior: "smooth"});
         if(isHamVisible) {
             setIsHamVisible(false)
-        }
-
-        if(type === featuredRef) {
-            setIsFeatured(true);
-        
-        } else {
-            setIsFeatured(false);
         }
     }
     
@@ -49,35 +39,35 @@ const NavBar = ({visibleSection, featuredRef, installationsRef, essayRef, single
 
 
             <button aria-expanded={isHamVisible} onClick={handleToggle}  data-collapse-toggle="navbar-hamburger" type="button" aria-controls="navbar-hamburger"  className="sm:flex py-2 pr-2 md:hidden lg:hidden justify-between">
-                <i class="fa fa-bars" aria-hidden="true"></i>
+                <i className="fa fa-bars" aria-hidden="true"></i>
             </button>
             
             </div>
             <div className={`${isHamVisible ? '' : 'hidden'} w-full`}  id="navbar-hamburger">
-                <ul class="flex flex-col font-medium mt-4 rounded-lg bg-gray-50 ">
+                <ul className="flex flex-col font-medium mt-4 rounded-lg bg-gray-50 ">
                     <li>
-                    <a onClick={() => handleClick(installationsRef)} class="block py-2 px-3 text-black  rounded " aria-current="page">Video Installations</a>
+                    <button type="button" onClick={() => handleClick(installationsRef)} className="block w-full text-left py-2 px-3 text-black rounded" aria-current="page">Video Installations</button>
                     </li>
                     <li className="focus:bg-[#fff7c9] focus:bg-opacity-60">
-                    <a onClick={() => handleClick(essayRef)} class="block py-2 px-3 text-gray-900 rounded  ">Essay Films</a>
+                    <button type="button" onClick={() => handleClick(essayRef)} className="block w-full text-left py-2 px-3 text-gray-900 rounded">Essay Films</button>
                     </li>
                     <li>
-                    <a onClick={() => handleClick(singleRef)} class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 ">Single Channel</a>
+                    <button type="button" onClick={() => handleClick(singleRef)} className="block w-full text-left py-2 px-3 text-gray-900 rounded hover:bg-gray-100">Single Channel</button>
                     </li>
                     <li>
-                    <a onClick={() => handleClick(photoRef)} class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 ">Photography</a>
-                    </li>
-                    
-                    <li>
-                    <a onClick={() => handleClick(resumeRef)} class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 ">CV</a>
+                    <button type="button" onClick={() => handleClick(photoRef)} className="block w-full text-left py-2 px-3 text-gray-900 rounded hover:bg-gray-100">Photography</button>
                     </li>
                     
                     <li>
-                    <a onClick={() => handleClick(publicationRef)} class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 ">Publications</a>
+                    <button type="button" onClick={() => handleClick(resumeRef)} className="block w-full text-left py-2 px-3 text-gray-900 rounded hover:bg-gray-100">CV</button>
                     </li>
                     
                     <li>
-                    <a onClick={() => handleClick(contactRef)} class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 ">Contact</a>
+                    <button type="button" onClick={() => handleClick(publicationRef)} className="block w-full text-left py-2 px-3 text-gray-900 rounded hover:bg-gray-100">Publications</button>
+                    </li>
+                    
+                    <li>
+                    <button type="button" onClick={() => handleClick(contactRef)} className="block w-full text-left py-2 px-3 text-gray-900 rounded hover:bg-gray-100">Contact</button>
                     </li>
                     
                 </ul>

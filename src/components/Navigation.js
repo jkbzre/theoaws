@@ -1,25 +1,21 @@
 // Navigation.js
 
-import React, {useEffect, useMemo, useState} from 'react';
+import React, { useState } from 'react';
 import OptimizedImage from './OptimizedImage';
 import PlayVideo from './PlayVideo';
 import videoDataByType from '../data/videoData';
 
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Navigation = ( { className, hoveredTitle, setHoveredTitle, handleVideoInstallations, handlePhotography, setShowMainSection, handleTheoClick, handleContentChange} ) => {
 
     const titles = ['Crocodiles on a ceiling', 'The Moving Museum', 'Dead Boys in Paradise'];
-    const links = ['http://drqlcggpj7pli.cloudfront.net/croc.mp4', 'http://drqlcggpj7pli.cloudfront.net/moving.mp4', 'http://drqlcggpj7pli.cloudfront.net/travellinglight.mp4', 'http://drqlcggpj7pli.cloudfront.net/ghostdance.mp4', 'http://drqlcggpj7pli.cloudfront.net/TDUDP.mp4']
     
     const category = ['installations', 'essay', 'single']
     const ids = ['crocodiles', 'moving-museum', 'paradise'];
-    const thumbnailId = ['http://drqlcggpj7pli.cloudfront.net/images/thumbnails/croc.jpg', 'http://drqlcggpj7pli.cloudfront.net/images/thumbnails/movingthumb.png', "http://drqlcggpj7pli.cloudfront.net/images/articles/paradise/para_thumb.jpg"]
+    const thumbnailId = ['https://drqlcggpj7pli.cloudfront.net/images/thumbnails/croc.jpg', 'https://drqlcggpj7pli.cloudfront.net/images/thumbnails/movingthumb.png', "https://drqlcggpj7pli.cloudfront.net/images/articles/paradise/para_thumb.jpg"]
 
-    const [isHovered, setIsHovered] = useState(false);
     const [isSlideDown, setIsSlideDown] = useState(false);
-
-    const [hoveredIndex, setHoveredIndex] = useState(null);
 
     const handleMouseEnter = (index) => () => setHoveredIndex(index);
     const handleMouseLeave = () => setHoveredIndex(null);
@@ -61,7 +57,7 @@ const Navigation = ( { className, hoveredTitle, setHoveredTitle, handleVideoInst
                 <div className={` px-4 sm:px-8 md:px-16 lg:px-72 2xl:px-32  -80 pb-10 top-0 bg-[#fcfcfc] z-50`}>
                     {/* Example usage: */}
                     {thumbnailId.map((thumb, idx) => (
-                        <OptimizedImage key={thumb} src={thumb} alt={titles[idx]} width={200} height={120} />
+                        <OptimizedImage key={thumb} src={thumb} alt={titles[idx]} width={200} height={120} priority />
                     ))}
                     <div className={`sticky ${isSlideDown ? 'slide-down ' : 'slide-none lg:slide-none-pc'} navbar z-10 bg-[#fcfcfc]  bg-opacity-90   top-0`}>
                         <div className={` flex justify-between lg:justify-normal sm:mx-auto  `}>
@@ -82,14 +78,17 @@ const Navigation = ( { className, hoveredTitle, setHoveredTitle, handleVideoInst
             <div className='flex '>
                 {Array(3).fill(null).map((_, index) => (
                 <div className={`relative group w-full px-2`} key={index}>
-                    <img
-                    key={index}
-                    src={thumbnailId[index]}
-                    alt={`Nav ${index + 1}`}
-                    onMouseEnter={handleMouseEnter(index)}
-                    onMouseLeave={handleMouseLeave}
-                    className={`md:w-48 w-full rounded-md drop-shadow-lg opacity-80 transform hover:opacity-100 hover:z-[1000] transition-all duration-300 cursor-pointer ${className}`}
-                    onClick={() => handleVideoClick(index)}
+                    <OptimizedImage
+                        key={index}
+                        src={thumbnailId[index]}
+                        alt={`Nav ${index + 1}`}
+                        onMouseEnter={handleMouseEnter(index)}
+                        onMouseLeave={handleMouseLeave}
+                        className={`md:w-48 w-full rounded-md drop-shadow-lg opacity-80 transform hover:opacity-100 hover:z-[1000] transition-all duration-300 cursor-pointer ${className}`}
+                        onClick={() => handleVideoClick(index)}
+                        width={320}
+                        height={200}
+                        priority
                     />
                 </div>
                 ))}
