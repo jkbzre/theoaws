@@ -92,19 +92,19 @@ function MainSection () {
 
 
                         <div className="container mx-auto lg:px-0 px-0">
-                            <div className="flex  justify-between">
-                                <div className="aspect-auto  ">
-                                    <video className="w-full border-2 border-yellow-200 border-opacity-80 flex-1  " src="https://drqlcggpj7pli.cloudfront.net/landing/nft_left_new.mov" poster="/thumbnails/landing-left-thumb.png" preload="metadata" playsInline autoPlay loop muted>
+                            <div className="flex justify-between gap-x-10 sm:gap-x-14 md:gap-x-20 lg:gap-x-32">
+                                <div className="flex-1">
+                                    <video className="w-full aspect-video object-cover border-2 border-yellow-200 border-opacity-80" src="https://drqlcggpj7pli.cloudfront.net/landing/nft_left_new.mov" poster="/thumbnails/landing-left-thumb.png" preload="metadata" playsInline autoPlay loop muted>
                                     </video>
                                 </div>
 
-                                <div className="aspect-auto lg:mx-32 md:mx-20 sm:mx-14 mx-10 ">
-                                    <video  className="w-full border-2 border-yellow-200 border-opacity-80 flex-1 " src="https://drqlcggpj7pli.cloudfront.net/landing/nft_center.mov" poster="/thumbnails/landing-center-thumb.png" preload="metadata" playsInline autoPlay loop muted>
+                                <div className="flex-1">
+                                    <video  className="w-full aspect-video object-cover border-2 border-yellow-200 border-opacity-80" src="https://drqlcggpj7pli.cloudfront.net/landing/nft_center.mov" poster="/thumbnails/landing-center-thumb.png" preload="metadata" playsInline autoPlay loop muted>
                                     </video>
                                 </div>
 
-                                <div className="aspect-auto">
-                                    <video className="w-full border-2 border-yellow-200 border-opacity-80 flex-1 " src="https://drqlcggpj7pli.cloudfront.net/landing/nft_right_new.mov" poster="/thumbnails/landing-right-thumb.png" preload="metadata" playsInline autoPlay loop muted>
+                                <div className="flex-1">
+                                    <video className="w-full aspect-video object-cover border-2 border-yellow-200 border-opacity-80" src="https://drqlcggpj7pli.cloudfront.net/landing/nft_right_new.mov" poster="/thumbnails/landing-right-thumb.png" preload="metadata" playsInline autoPlay loop muted>
                                     </video>
                                 </div>
                             </div>
