@@ -8,7 +8,7 @@ import OptimizedImage from './OptimizedImage';
 function Videos() {
     const {urlType, urlVideo} = useParams();
 
-    const [videoType, setVideoType] = useState(urlType);
+    const videoType = urlType;
     
     const [showVideo, setShowVideo] = useState(null);
 
