@@ -172,7 +172,7 @@ function Videos() {
                                 
                 <div className=" px-4 sm:px-8 md:px-16 2xl:px-32 lg:px-72   py-10  top-0  z-50">
                     
-                    <div className='grid grid-cols-3 gap-4'>
+                    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
                         {showVideo === null ? videoData.map((video, idx) => (
                         <Link key={video.id} to={`${video.id}`}>
                         <div className="relative group hover:opacity-100    transition-opacity duration-300 cursor-pointer ">

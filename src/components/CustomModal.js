@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
+import OptimizedImage from './OptimizedImage';
 
 const CustomModal = ({ isOpen, onClose, imageUrl, carouselImg }) => {
 
@@ -63,7 +64,16 @@ const CustomModal = ({ isOpen, onClose, imageUrl, carouselImg }) => {
 
           <div className='relative  overflow-hidden'>
             <div className="max-w-6xl  mx-auto rounded-md" >
-              <img src={carouselImg[currentImageIndex]} alt="Modal Content" className="w-full  max-w-6xl h-auto rounded-sm" />
+              <OptimizedImage
+                src={carouselImg[currentImageIndex]}
+                alt="Modal Content"
+                className="w-full  max-w-6xl h-auto rounded-sm"
+                priority
+                enableVariants={false}
+                enableBlurPlaceholder={false}
+                objectFit="contain"
+                style={{ height: 'auto' }}
+              />
             </div>
           </div>
 

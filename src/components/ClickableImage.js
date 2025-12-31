@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import CustomModal from './CustomModal'; 
+import OptimizedImage from './OptimizedImage';
 
 const ClickableImage = ({ imageUrl, carouselImg, imageStyling }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -9,7 +10,6 @@ const ClickableImage = ({ imageUrl, carouselImg, imageStyling }) => {
 
   function handleImageLoad() {
     setImageLoaded(true);
-    console.log("loading")
   }
 
   const openModal = (imageUrl) => {
@@ -19,13 +19,20 @@ const ClickableImage = ({ imageUrl, carouselImg, imageStyling }) => {
   };
 
   const closeModal = () => {
-    console.log("closing modal")
     setModalIsOpen(false);
   };
 
   return (
     <>
-    <img src={imageUrl} onLoad={handleImageLoad} onClick={() => openModal(imageUrl)} className={`cursor-pointer ${imageStyling ? imageStyling : ''}`} />
+    <OptimizedImage
+      src={imageUrl}
+      alt=""
+      onLoad={handleImageLoad}
+      onClick={() => openModal(imageUrl)}
+      className={`cursor-pointer ${imageStyling ? imageStyling : ''}`}
+      enableVariants={false}
+      enableBlurPlaceholder={false}
+    />
       {!imageLoaded && <p></p>}
       {imageLoaded && 
         modalIsOpen && (

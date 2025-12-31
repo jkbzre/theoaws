@@ -1,1 +1,5 @@
 node_modules
+
+# Thumbnails are hosted in S3/CloudFront (do not commit locally generated variants)
+public/thumbnails/
+build/thumbnails/
