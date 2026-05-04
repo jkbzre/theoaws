@@ -1,6 +1,8 @@
-import React, { Suspense, useCallback, useEffect, useRef, useState } from "react";
+import React, { Suspense, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import NavBar from "./NavBar";
 import LazyMount from "./LazyMount";
+import OptimizedImage from "./OptimizedImage";
 
 const VideoInstallations = React.lazy(() => import("./v2/VideoInstallations"));
 const NewPhotography = React.lazy(() => import("./v2/NewPhotography"));
@@ -11,6 +13,8 @@ const Contact = React.lazy(() => import("./v2/Contact"));
 
 function MainSection () {
 
+    const GARDEN_HERO_SRC = `${process.env.PUBLIC_URL}/broken.jpg`;
+
     const installationsRef = useRef(null);
     const essayRef = useRef(null);
     const singleRef = useRef(null);
@@ -20,11 +24,36 @@ function MainSection () {
     const contactRef = useRef(null);
     const featuredRef = useRef(null);
 
+    const navWrapperRef = useRef(null);
+    const [navHeight, setNavHeight] = useState(0);
+
 
 
     const sectionsRef = useRef([]);
 
 
+
+    useLayoutEffect(() => {
+        const updateNavHeight = () => {
+            const nextHeight = navWrapperRef.current?.getBoundingClientRect?.().height ?? 0;
+            setNavHeight(nextHeight);
+        };
+
+        updateNavHeight();
+
+        let resizeObserver;
+        if (typeof ResizeObserver !== "undefined" && navWrapperRef.current) {
+            resizeObserver = new ResizeObserver(() => updateNavHeight());
+            resizeObserver.observe(navWrapperRef.current);
+        }
+
+        window.addEventListener("resize", updateNavHeight);
+
+        return () => {
+            window.removeEventListener("resize", updateNavHeight);
+            resizeObserver?.disconnect?.();
+        };
+    }, []);
 
     useEffect(() => {
         const hash = window.location.hash.slice(1);
@@ -50,6 +79,10 @@ function MainSection () {
         sectionsRef.current.forEach((section) => {
             observer.observe(section)
         })
+
+        return () => {
+            observer.disconnect();
+        };
     }, [])
 
 
@@ -69,7 +102,7 @@ function MainSection () {
     <div className={``}>
     <div className={`relative h-screen section  `} >
 
-    <div className='fixed  bg-white text-black  z-[500] transition-all w-full lg:py-2'>
+    <div ref={navWrapperRef} className='fixed  bg-white text-black  z-[500] transition-all w-full lg:py-2'>
 
 
         <NavBar visibleSection={visibleSection}  installationsRef={installationsRef} contactRef={contactRef} singleRef={singleRef} essayRef={essayRef} publicationRef={publicationRef} photoRef={photoRef} resumeRef={resumeRef} featuredRef={featuredRef}/>
@@ -80,39 +113,55 @@ function MainSection () {
     </div>
 
     <>
-            <div id="Featured" className="bg-black" ref={refCallback}>
-                <div ref={featuredRef} className='sectionfeatured h-screen flex justify-center items-center '>
-                <div className='w-full '>
+            <div
+                id="Featured"
+                className="bg-black"
+                style={{ scrollMarginTop: navHeight + 16 }}
+                ref={refCallback}
+            >
+                <div
+                    ref={featuredRef}
+                    className='sectionfeatured min-h-screen flex justify-center items-start'
+                    style={{ paddingTop: navHeight + 16 }}
+                >
+                <div className='w-full'>
 
 
 
-                        <div className='flex  justify-center items-center'>
-                        <span className='theo-title text-center  sm:tracking-normal justify-center text-6xl pb-20  lg:pb-20 cursor-default text-yellow-100 uppercase'>Theo Eshetu</span>
+                        <div className='flex justify-center items-center'>
+                            <div className='w-full px-4 lg:px-0 flex flex-col items-center'>
+                                <span className='theo-title text-center sm:tracking-normal text-4xl sm:text-5xl lg:text-6xl pb-6 lg:pb-8 cursor-default text-yellow-100 uppercase'>
+                                    The Garden of the Broken-Hearted
+                                </span>
+        
+                            </div>
                         </div>
 
-
-                        <div className="container mx-auto lg:px-0 px-0">
-                            <div className="flex justify-center sm:justify-between gap-x-0 sm:gap-x-14 md:gap-x-20 lg:gap-x-32">
-                                <div className="hidden sm:block flex-1">
-                                    <video className="w-full aspect-video object-cover border-2 border-yellow-200 border-opacity-80" src="https://drqlcggpj7pli.cloudfront.net/landing/nft_left_new.mov" poster="https://drqlcggpj7pli.cloudfront.net/images/thumbnails/landing-left-thumb.800.png" preload="metadata" playsInline autoPlay loop muted>
-                                    </video>
-                                </div>
-
-                                <div className="w-full sm:flex-1">
-                                    <video  className="w-full aspect-video object-cover border-2 border-yellow-200 border-opacity-80" src="https://drqlcggpj7pli.cloudfront.net/landing/nft_center.mov" poster="https://drqlcggpj7pli.cloudfront.net/images/thumbnails/landing-center-thumb.800.png" preload="metadata" playsInline autoPlay loop muted>
-                                    </video>
-                                </div>
-
-                                <div className="hidden sm:block flex-1">
-                                    <video className="w-full aspect-video object-cover border-2 border-yellow-200 border-opacity-80" src="https://drqlcggpj7pli.cloudfront.net/landing/nft_right_new.mov" poster="https://drqlcggpj7pli.cloudfront.net/images/thumbnails/landing-right-thumb.800.png" preload="metadata" playsInline autoPlay loop muted>
-                                    </video>
+                        <div className="container mx-auto lg:px-0 px-4">
+                            <div className="flex justify-center">
+                                <div className="w-full max-w-sm">
+                                    <OptimizedImage
+                                        src={GARDEN_HERO_SRC}
+                                        alt="The Garden of the Broken-Hearted"
+                                        className="w-full aspect-video object-cover border-2 border-yellow-200 border-opacity-80"
+                                        width={435}
+                                        height={657}
+                                        priority
+                                        enableVariants={false}
+                                        enableBlurPlaceholder={false}
+                                    />
                                 </div>
                             </div>
                         </div>
 
-                        
-                        <div className='flex justify-center items-center'>
-                        <span className={`text-lg  text-left lg:max-w-[60rem] px-4 lg:px-0 leading-normal  block  lg:pt-20 pt-20  `}>Theo Eshetu utilises diverse video formats to explore cinematic representations and the visual grammar of the moving image. A recurring theme throughout is the stitching of histories – from European imperialism to African modernity – to develop an aesthetic that captures the interrelation between world cultures and communal knowledge. These works experiment with the process of layering and mirroring, and the use of non-linear narratives that challenge how images are perceived.</span>
+
+                        <div className='flex justify-center items-center pt-8'>
+                            <Link
+                                to="/garden-of-the-broken-hearted"
+                                className="uppercase text-xs sm:text-sm border border-yellow-200 border-opacity-80 text-yellow-100 px-6 py-3 hover:opacity-90"
+                            >
+                                Venice Biennale — now on view
+                            </Link>
                         </div>
                     
                         <div>

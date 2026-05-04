@@ -10,6 +10,7 @@ import './css/styles.css'
 import Videos from './components/Videos';
 import MainSection from './components/MainSection';
 import NewPhotography from './components/v2/NewPhotography';
+import GardenOfTheBrokenHearted from './components/v2/GardenOfTheBrokenHearted';
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
         <Router>
         <Routes>
             <Route path="/" element={<MainSection />} />
+            <Route path='/garden-of-the-broken-hearted' element={<GardenOfTheBrokenHearted />} />
             <Route path='/videos/:urlType/:urlVideo?' element={<Videos />} />
             <Route path='/photography/:urlAlbum?' element={<NewPhotography />}></Route>
             <Route path='/adieu' element={<Adieu />}></Route>   
