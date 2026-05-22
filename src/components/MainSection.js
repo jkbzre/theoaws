@@ -140,16 +140,22 @@ function MainSection () {
                         <div className="container mx-auto lg:px-0 px-4">
                             <div className="flex justify-center">
                                 <div className="w-full max-w-sm">
-                                    <OptimizedImage
-                                        src={GARDEN_HERO_SRC}
-                                        alt="The Garden of the Broken-Hearted"
-                                        className="w-full aspect-video object-cover border-2 border-yellow-200 border-opacity-80"
-                                        width={435}
-                                        height={657}
-                                        priority
-                                        enableVariants={false}
-                                        enableBlurPlaceholder={false}
-                                    />
+                                    <Link
+                                        to="/garden-of-the-broken-hearted"
+                                        aria-label="Open The Garden of the Broken-Hearted"
+                                        className="block transition-opacity hover:opacity-90"
+                                    >
+                                        <OptimizedImage
+                                            src={GARDEN_HERO_SRC}
+                                            alt="The Garden of the Broken-Hearted"
+                                            className="w-full aspect-video object-cover border-2 border-yellow-200 border-opacity-80"
+                                            width={435}
+                                            height={657}
+                                            priority
+                                            enableVariants={false}
+                                            enableBlurPlaceholder={false}
+                                        />
+                                    </Link>
                                 </div>
                             </div>
                         </div>
