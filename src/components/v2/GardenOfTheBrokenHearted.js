@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 
 const projectText = `
@@ -26,31 +26,14 @@ const projectParagraphs = projectText.trim().split(/\n\s*\n/);
 const GardenOfTheBrokenHearted = () => {
     const GARDEN_2_SRC = `${process.env.PUBLIC_URL}/Garden2.jpg`;
     const GARDEN_3_SRC = `${process.env.PUBLIC_URL}/Garden3.jpg`;
-    const galleryImages = [
-        {
-            src: `${process.env.PUBLIC_URL}/Garden5.jpg`,
-            alt: "Vertical garden composition from The Garden of the Broken-Hearted",
-            className: "lg:col-span-5 lg:row-span-2 lg:self-center lg:pr-6",
-        },
-        {
-            src: `${process.env.PUBLIC_URL}/Garden7.jpg`,
-            alt: "Landscape garden composition from The Garden of the Broken-Hearted",
-            className: "lg:col-span-7 lg:self-start",
-        },
-        {
-            src: `${process.env.PUBLIC_URL}/Garden6.jpg`,
-            alt: "Tall garden installation view from The Garden of the Broken-Hearted",
-            className: "mx-auto max-w-[520px] lg:col-span-4 lg:col-start-8 lg:-mt-10 lg:max-w-none lg:pr-10",
-        },
-    ];
+    const GARDEN_4_SRC = `${process.env.PUBLIC_URL}/Garden4.jpg`;
 
     return (
-        <main className="relative isolate min-h-screen overflow-hidden bg-[#070805] text-[#fff7c9]">
-            <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_15%_10%,rgba(255,247,201,0.06),transparent_30%),radial-gradient(circle_at_86%_18%,rgba(95,115,58,0.12),transparent_34%),radial-gradient(circle_at_18%_68%,rgba(255,247,201,0.045),transparent_32%),radial-gradient(circle_at_82%_82%,rgba(159,111,45,0.08),transparent_34%),linear-gradient(135deg,#050603_0%,#0c1007_44%,#070805_100%)]" />
-            <div className="absolute left-[-10rem] top-24 -z-10 h-80 w-80 rounded-full bg-[#5b6d31]/12 blur-3xl" />
-            <div className="absolute bottom-20 right-[-12rem] -z-10 h-96 w-96 rounded-full bg-[#9f6f2d]/10 blur-3xl" />
+        <main className="min-h-screen overflow-hidden bg-[#070805] text-[#fff7c9]">
+            <section className="relative isolate px-4 py-8 sm:px-8 sm:py-10 md:px-16 lg:px-24 2xl:px-32">
+                <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_15%_12%,rgba(255,247,201,0.12),transparent_30%),radial-gradient(circle_at_86%_18%,rgba(95,115,58,0.24),transparent_34%),linear-gradient(135deg,#050603_0%,#111709_52%,#050603_100%)]" />
+                <div className="absolute bottom-0 left-0 right-0 -z-10 h-48 bg-gradient-to-b from-transparent to-[#070805]" />
 
-            <section className="px-4 py-8 sm:px-8 sm:py-10 md:px-16 lg:px-24 2xl:px-32">
                 <div className="mx-auto max-w-7xl">
                     <div className="flex items-center justify-between gap-6 text-[#fff7c9]/75">
                         <Link
@@ -96,29 +79,30 @@ const GardenOfTheBrokenHearted = () => {
             </section>
 
             <section className="px-4 pb-20 sm:px-8 md:px-16 lg:px-24 2xl:px-32">
-                <article className="mx-auto max-w-4xl border-t border-[#fff7c9]/15 pt-12 text-left text-[1.05rem] leading-relaxed text-[#fff7c9]/86 sm:text-lg lg:pt-16">
-                    <div className="space-y-6">
-                        {projectParagraphs.map((paragraph) => (
-                            <p key={paragraph}>{paragraph}</p>
-                        ))}
+                <article className="mx-auto max-w-4xl border-t border-[#fff7c9]/15 pt-12 text- text-[1.05rem] leading-relaxed text-[#fff7c9]/86 sm:text-lg lg:pt-16">
+                    <div className="flow-root space-y-6">
+                        {projectParagraphs.map((paragraph, index) => {
+                            const isFinalParagraph = index === projectParagraphs.length - 1;
+
+                            return (
+                                <Fragment key={paragraph}>
+                                    {isFinalParagraph && (
+                                        <figure className="mb-8 w-full shadow-2xl shadow-black/55 sm:float-right sm:mb-4 sm:ml-8 sm:w-[34%]">
+                                            <img
+                                                src={GARDEN_4_SRC}
+                                                alt="Square garden composition from The Garden of the Broken-Hearted"
+                                                className="h-auto w-full"
+                                                loading="lazy"
+                                                decoding="async"
+                                            />
+                                        </figure>
+                                    )}
+                                    <p>{paragraph}</p>
+                                </Fragment>
+                            );
+                        })}
                     </div>
                 </article>
-            </section>
-
-            <section className="px-4 pb-24 pt-2 sm:px-8 md:px-16 lg:px-24 2xl:px-32">
-                <div className="mx-auto grid max-w-6xl gap-8 border-t border-[#fff7c9]/15 pt-12 sm:gap-10 lg:grid-cols-12 lg:gap-x-8 lg:gap-y-12">
-                    {galleryImages.map((image) => (
-                        <figure key={image.src} className={`shadow-2xl shadow-black/55 ${image.className}`}>
-                            <img
-                                src={image.src}
-                                alt={image.alt}
-                                className="h-auto w-full"
-                                loading="lazy"
-                                decoding="async"
-                            />
-                        </figure>
-                    ))}
-                </div>
             </section>
         </main>
     );
