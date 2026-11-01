@@ -1,0 +1,266 @@
+export default [
+  {
+    "title": "Blood Is Not Fresh Water",
+    "source": "blood.mp4",
+    "slug": "blood",
+    "high": "768x576",
+    "low": "384x288",
+    "manifest": "https://drqlcggpj7pli.cloudfront.net/hls-2026-11/blood/master.m3u8"
+  },
+  {
+    "title": "Travelling Light",
+    "source": "travellinglight.mp4",
+    "slug": "travellinglight",
+    "high": "768x576",
+    "low": "384x288",
+    "manifest": "https://drqlcggpj7pli.cloudfront.net/hls-2026-11/travellinglight/master.m3u8"
+  },
+  {
+    "title": "Roma",
+    "source": "roma.mp4",
+    "slug": "roma",
+    "high": "1920x542",
+    "low": "960x270",
+    "manifest": "https://drqlcggpj7pli.cloudfront.net/hls-2026-11/roma/master.m3u8"
+  },
+  {
+    "title": "The Moving Museum - arrivals and departures",
+    "source": "moving.mp4",
+    "slug": "moving",
+    "high": "1920x1080",
+    "low": "960x540",
+    "manifest": "https://drqlcggpj7pli.cloudfront.net/hls-2026-11/moving/master.m3u8"
+  },
+  {
+    "title": "An Extraordinary Event",
+    "source": "AnExtraordinaryEvent.mov",
+    "slug": "anextraordinaryevent",
+    "high": "766x576",
+    "low": "382x288",
+    "manifest": "https://drqlcggpj7pli.cloudfront.net/hls-2026-11/anextraordinaryevent/master.m3u8"
+  },
+  {
+    "title": "Ways to a Void",
+    "source": "waystoavoid.mp4",
+    "slug": "waystoavoid",
+    "high": "1920x1080",
+    "low": "960x540",
+    "manifest": "https://drqlcggpj7pli.cloudfront.net/hls-2026-11/waystoavoid/master.m3u8"
+  },
+  {
+    "title": "Dead Boys in Paradise",
+    "source": "turkanaboys.mov",
+    "slug": "turkanaboys",
+    "high": "1920x1080",
+    "low": "960x540",
+    "manifest": "https://drqlcggpj7pli.cloudfront.net/hls-2026-11/turkanaboys/master.m3u8"
+  },
+  {
+    "title": "Questa é Vita",
+    "source": "QuestaeVita1986.mp4",
+    "slug": "questaevita1986",
+    "high": "768x576",
+    "low": "384x288",
+    "manifest": "https://drqlcggpj7pli.cloudfront.net/hls-2026-11/questaevita1986/master.m3u8"
+  },
+  {
+    "title": "Nativity",
+    "source": "nativity.mp4",
+    "slug": "nativity",
+    "high": "768x576",
+    "low": "384x288",
+    "manifest": "https://drqlcggpj7pli.cloudfront.net/hls-2026-11/nativity/master.m3u8"
+  },
+  {
+    "title": "La Madonna di Theo Eshetu",
+    "source": "LaMadonna.mp4",
+    "slug": "lamadonna",
+    "high": "768x576",
+    "low": "384x288",
+    "manifest": "https://drqlcggpj7pli.cloudfront.net/hls-2026-11/lamadonna/master.m3u8"
+  },
+  {
+    "title": "Mass Memory",
+    "source": "MassMemory.mp4",
+    "slug": "massmemory",
+    "high": "720x576",
+    "low": "360x288",
+    "manifest": "https://drqlcggpj7pli.cloudfront.net/hls-2026-11/massmemory/master.m3u8"
+  },
+  {
+    "title": "Art Is Easy",
+    "source": "art_is_easy.mp4",
+    "slug": "art-is-easy",
+    "high": "768x576",
+    "low": "384x288",
+    "manifest": "https://drqlcggpj7pli.cloudfront.net/hls-2026-11/art-is-easy/master.m3u8"
+  },
+  {
+    "title": "K-Kino",
+    "source": "k_kino.mp4",
+    "slug": "k-kino",
+    "high": "1440x1080",
+    "low": "720x540",
+    "manifest": "https://drqlcggpj7pli.cloudfront.net/hls-2026-11/k-kino/master.m3u8"
+  },
+  {
+    "title": "Horses",
+    "source": "horses.mp4",
+    "slug": "horses",
+    "high": "1476x1080",
+    "low": "738x540",
+    "manifest": "https://drqlcggpj7pli.cloudfront.net/hls-2026-11/horses/master.m3u8"
+  },
+  {
+    "title": "L´Altro Mondo",
+    "source": "LaltroMondo.mp4",
+    "slug": "laltromondo",
+    "high": "1436x1080",
+    "low": "718x540",
+    "manifest": "https://drqlcggpj7pli.cloudfront.net/hls-2026-11/laltromondo/master.m3u8"
+  },
+  {
+    "title": "Atlas Fractured - Kassel",
+    "source": "atlas_kassel.mp4",
+    "slug": "atlas-kassel",
+    "high": "1920x1080",
+    "low": "960x540",
+    "manifest": "https://drqlcggpj7pli.cloudfront.net/hls-2026-11/atlas-kassel/master.m3u8"
+  },
+  {
+    "title": "Atlas Fractured - Athens",
+    "source": "atlas.mp4",
+    "slug": "atlas",
+    "high": "1920x540",
+    "low": "960x270",
+    "manifest": "https://drqlcggpj7pli.cloudfront.net/hls-2026-11/atlas/master.m3u8"
+  },
+  {
+    "title": "The Phi Phenomenon",
+    "source": "thephiphenomenon.mp4",
+    "slug": "thephiphenomenon",
+    "high": "1920x540",
+    "low": "960x270",
+    "manifest": "https://drqlcggpj7pli.cloudfront.net/hls-2026-11/thephiphenomenon/master.m3u8"
+  },
+  {
+    "title": "Ghost Dance",
+    "source": "ghostdance.mp4",
+    "slug": "ghostdance",
+    "high": "1920x1012",
+    "low": "960x506",
+    "manifest": "https://drqlcggpj7pli.cloudfront.net/hls-2026-11/ghostdance/master.m3u8"
+  },
+  {
+    "title": "Adieu Les Demoiselles",
+    "source": "adieu.mp4",
+    "slug": "adieu",
+    "high": "1920x1080",
+    "low": "960x540",
+    "manifest": "https://drqlcggpj7pli.cloudfront.net/hls-2026-11/adieu/master.m3u8"
+  },
+  {
+    "title": "The Slave Ship",
+    "source": "slave.mp4",
+    "slug": "slave",
+    "high": "1920x1080",
+    "low": "960x540",
+    "manifest": "https://drqlcggpj7pli.cloudfront.net/hls-2026-11/slave/master.m3u8"
+  },
+  {
+    "title": "The Return of The Axum Obelisk",
+    "source": "axum.mp4",
+    "slug": "axum",
+    "high": "1920x1080",
+    "low": "960x540",
+    "manifest": "https://drqlcggpj7pli.cloudfront.net/hls-2026-11/axum/master.m3u8"
+  },
+  {
+    "title": "Kiss The Moment",
+    "source": "kiss.mp4",
+    "slug": "kiss",
+    "high": "1920x1080",
+    "low": "960x540",
+    "manifest": "https://drqlcggpj7pli.cloudfront.net/hls-2026-11/kiss/master.m3u8"
+  },
+  {
+    "title": "Crocodile on a Ceiling",
+    "source": "croc.mp4",
+    "slug": "croc",
+    "high": "1920x1080",
+    "low": "960x540",
+    "manifest": "https://drqlcggpj7pli.cloudfront.net/hls-2026-11/croc/master.m3u8"
+  },
+  {
+    "title": "Anima Mundi",
+    "source": "anima2.mp4",
+    "slug": "anima2",
+    "high": "1920x1080",
+    "low": "960x540",
+    "manifest": "https://drqlcggpj7pli.cloudfront.net/hls-2026-11/anima2/master.m3u8"
+  },
+  {
+    "title": "Zar Possession",
+    "source": "zar.mp4",
+    "slug": "zar",
+    "high": "1920x1080",
+    "low": "960x540",
+    "manifest": "https://drqlcggpj7pli.cloudfront.net/hls-2026-11/zar/master.m3u8"
+  },
+  {
+    "title": "Veiled Woman on a Beachfront",
+    "source": "veiled.mp4",
+    "slug": "veiled",
+    "high": "1920x1012",
+    "low": "960x506",
+    "manifest": "https://drqlcggpj7pli.cloudfront.net/hls-2026-11/veiled/master.m3u8"
+  },
+  {
+    "title": "Brave New World",
+    "source": "brave.mp4",
+    "slug": "brave",
+    "high": "1920x1080",
+    "low": "960x540",
+    "manifest": "https://drqlcggpj7pli.cloudfront.net/hls-2026-11/brave/master.m3u8"
+  },
+  {
+    "title": "The Lamu Project",
+    "source": "SEASCAPE.mp4",
+    "slug": "seascape",
+    "high": "1920x1080",
+    "low": "960x540",
+    "manifest": "https://drqlcggpj7pli.cloudfront.net/hls-2026-11/seascape/master.m3u8"
+  },
+  {
+    "title": "The Festival of Sacrifice",
+    "source": "sacrifice.mp4",
+    "slug": "sacrifice",
+    "high": "1920x1080",
+    "low": "960x540",
+    "manifest": "https://drqlcggpj7pli.cloudfront.net/hls-2026-11/sacrifice/master.m3u8"
+  },
+  {
+    "title": "Meditation Light",
+    "source": "MeditationLight.mp4",
+    "slug": "meditationlight",
+    "high": "1280x244",
+    "low": "640x122",
+    "manifest": "https://drqlcggpj7pli.cloudfront.net/hls-2026-11/meditationlight/master.m3u8"
+  },
+  {
+    "title": "Trip to Mount Zuqualla",
+    "source": "tripgood.mp4",
+    "slug": "tripgood",
+    "high": "1920x1080",
+    "low": "960x540",
+    "manifest": "https://drqlcggpj7pli.cloudfront.net/hls-2026-11/tripgood/master.m3u8"
+  },
+  {
+    "title": "Till Death Us Do Part",
+    "source": "TDUDP.mp4",
+    "slug": "tdudp",
+    "high": "768x576",
+    "low": "384x288",
+    "manifest": "https://drqlcggpj7pli.cloudfront.net/hls-2026-11/tdudp/master.m3u8"
+  }
+];
