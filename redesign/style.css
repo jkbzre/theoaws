@@ -207,3 +207,6 @@ header .subtitle{margin-bottom:20px}
 #about:has(.about-intro) > .about-heading{font-size:17px}
 
 .about-copy{text-align:justify}
+
+/* Keep both landing-page labels on one line, sharing available width. */
+.slide-info{display:flex;flex-wrap:nowrap;justify-content:space-between;gap:14px}.slide-info > [aria-hidden="true"]{display:none}.slide-info .slide-title,.slide-info .exhibition-note{white-space:nowrap;flex:none}.slide-info .slide-title{overflow-wrap:normal}
