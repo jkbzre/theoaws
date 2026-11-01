@@ -77,7 +77,7 @@ const sampleDetails={
 };
 // Provisional selection: replace these IDs when the featured works are agreed.
 const featuredIds=['paradise','crocodiles','ghost-dance','atlas-kassel','brave-new-world','blood-is-not-fresh-water'];
-const featured=[{...gardenData,category:'installations',portrait:true,onView:'on view - venice biennale - 2026'},...featuredIds.map(id=>items.find(p=>p.id===id)).filter(Boolean).map(p=>p.id==='crocodiles'?{...p,thumbnail:'assets/crocodile-original.jpg'}:p.id==='paradise'?{...p,thumbnail:'assets/dead-boys-original.jpg'}:p)];
+const featured=[{...gardenData,category:'installations',portrait:true,onView:'on view - venice biennale - 2026'},...featuredIds.map(id=>items.find(p=>p.id===id)).filter(Boolean).map(p=>p.id==='crocodiles'?{...p,thumbnail:'assets/crocodile-original.jpg'}:p.id==='paradise'?{...p,thumbnail:'assets/dead-boys-landing-2.jpg'}:p)];
 let hero=document.querySelector('#hero-image');
 const heroLink=document.querySelector('#hero-link'),dots=document.querySelector('#dots'),slideTitle=document.querySelector('#slide-title'),exhibitionNote=document.querySelector('#exhibition-note');
 let slide=0,timer=null,autoStartTimer=null,interactionStarted=false,hovering=false,focused=false;
