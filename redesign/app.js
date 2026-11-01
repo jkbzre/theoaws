@@ -169,7 +169,7 @@ function show(p){
   const facts=el('div',null,'project-facts');
   const sample=sampleDetails[`${p.category}/${p.id}`];
   const factValues=sample||[['Format',p.undertitle],['Details',p.undertitle2],['Duration',p.length]];
-  for(const [label,value] of factValues){if(!value||label.toLowerCase()==='year')continue;const row=el('div',null,'fact-row');let display=String(value).replace(/\bi\//g,'');if(label==='Duration')display=display.replace(/\bminutes?\b/gi,'m');row.append(el('span',label==='Format'?'Info':label,'fact-label'),el('span',display,'fact-value'));facts.append(row)}
+  for(const [label,value] of factValues){if(!value||label.toLowerCase()==='year')continue;const row=el('div',null,'fact-row');let display=String(value).replace(/\bi\//g,'');if(label==='Duration')display=display.replace(/(\d)\s*(?:minutes?|m)\b/gi,'$1m');row.append(el('span',label==='Format'?'Info':label,'fact-label'),el('span',display,'fact-value'));facts.append(row)}
   const omitEmptyFacts=!facts.childNodes.length&&(p.category==='photography'||(p.category==='installations'&&['lamu-project','garden-of-the-broken-hearted'].includes(p.id)));
   if(!omitEmptyFacts) info.append(facts);
   const description=el('div',null,'project-description');
