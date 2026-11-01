@@ -78,24 +78,34 @@ const sampleDetails={
 // Provisional selection: replace these IDs when the featured works are agreed.
 const featuredIds=['paradise','crocodiles','ghost-dance','atlas-kassel','brave-new-world','blood-is-not-fresh-water'];
 const featured=[{...gardenData,category:'installations',portrait:true,onView:'on view - venice biennale - 2026'},...featuredIds.map(id=>items.find(p=>p.id===id)).filter(Boolean).map(p=>p.id==='crocodiles'?{...p,thumbnail:'assets/crocodile-original.jpg'}:p.id==='paradise'?{...p,thumbnail:'assets/dead-boys-original.jpg'}:p)];
-const hero=document.querySelector('#hero-image'),heroLink=document.querySelector('#hero-link'),dots=document.querySelector('#dots'),slideTitle=document.querySelector('#slide-title'),exhibitionNote=document.querySelector('#exhibition-note');
+let hero=document.querySelector('#hero-image');
+const heroLink=document.querySelector('#hero-link'),dots=document.querySelector('#dots'),slideTitle=document.querySelector('#slide-title'),exhibitionNote=document.querySelector('#exhibition-note');
 let slide=0,timer=null,autoStartTimer=null,interactionStarted=false,hovering=false,focused=false;
 const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)');
 const slideInfo=document.querySelector('.slide-info');
-const captionCanvas=document.createElement('canvas');
-const captionContext=captionCanvas.getContext('2d');
-function fitSlideCaption(){
-  if(!captionContext||home.hidden||!slideInfo.clientWidth)return;
-  const baseSize=13,available=slideInfo.clientWidth-14;
-  captionContext.font=`${baseSize}px ${getComputedStyle(slideInfo).fontFamily}`;
-  const textWidth=captionContext.measureText(slideTitle.textContent.toLocaleLowerCase()).width+captionContext.measureText(exhibitionNote.textContent.toLocaleLowerCase()).width;
-  const size=textWidth>available?Math.floor(baseSize*available/textWidth*100)/100:baseSize;
-  slideInfo.style.fontSize=`${Math.max(1,size)}px`;
+const slideStatusDesktop=exhibitionNote.querySelector('.slide-status-desktop'),slideStatusYear=exhibitionNote.querySelector('.slide-status-year'),slideStatusNotice=exhibitionNote.querySelector('.slide-status-notice');
+let slideRequest=0;
+async function updateSlide(){
+  const index=slide,p=featured[index],request=++slideRequest;
+  if(!p)return;
+  const next=new Image();
+  next.id='hero-image';
+  next.alt=p.title;
+  next.classList.toggle('portrait',!!p.portrait);
+  next.src=safeURL(p.thumbnail);
+  try{await next.decode()}catch{return}
+  if(request!==slideRequest)return;
+  hero.replaceWith(next);
+  hero=next;
+  heroLink.href=p.url||`#work/${p.category}/${p.id}`;
+  slideTitle.textContent=p.title;
+  slideStatusDesktop.textContent=p.onView||p.year||'';
+  slideStatusYear.textContent=p.year||'';
+  slideStatusNotice.textContent=p.onView&&p.year&&p.onView.endsWith(p.year)?p.onView.slice(0,-p.year.length).replace(/\s*[-–—]\s*$/,''):p.onView||'';
+  slideInfo.classList.toggle('has-on-view',Boolean(p.onView));
+  heroLink.setAttribute('aria-label',`View ${p.title}`);
+  [...dots.children].forEach((b,i)=>b.setAttribute('aria-current',String(i===index)));
 }
-window.addEventListener('resize',fitSlideCaption);
-document.fonts?.ready.then(fitSlideCaption);
-
-function updateSlide(){const p=featured[slide];if(!p)return;hero.src=safeURL(p.thumbnail);hero.alt=p.title;heroLink.href=p.url||`#work/${p.category}/${p.id}`;hero.classList.toggle('portrait',!!p.portrait);slideTitle.textContent=p.title;exhibitionNote.textContent=p.onView||p.year||'';fitSlideCaption();heroLink.setAttribute('aria-label',`View ${p.title}`);[...dots.children].forEach((b,i)=>b.setAttribute('aria-current',String(i===slide)))}
 featured.forEach((p,i)=>{const b=el('button');b.type='button';b.setAttribute('aria-label',`Show ${p.title}`);b.addEventListener('click',()=>{slide=i;updateSlide();restart()});dots.append(b)});
 function restart(){clearInterval(timer);timer=null;dots.classList.toggle('has-started',interactionStarted);const playing=interactionStarted&&!hovering&&!focused&&!reduceMotion.matches&&!home.hidden&&featured.length>1;dots.classList.toggle('is-playing',playing);if(playing)timer=setInterval(()=>{slide=(slide+1)%featured.length;updateSlide()},3000)}
 heroLink.addEventListener('pointerenter',event=>{if(event.pointerType==='touch')return;interactionStarted=true;hovering=true;restart()});
@@ -104,6 +114,25 @@ home.addEventListener('focusin',()=>{focused=true;restart()});
 home.addEventListener('focusout',event=>{if(!home.contains(event.relatedTarget)){focused=false;restart()}});
 window.addEventListener('keydown',event=>{if(home.hidden || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey || ['INPUT','TEXTAREA','SELECT'].includes(event.target.tagName) || event.target.isContentEditable || !['ArrowLeft','ArrowRight'].includes(event.key) || featured.length<2)return;event.preventDefault();slide=(slide+(event.key==='ArrowRight'?1:-1)+featured.length)%featured.length;updateSlide();restart()});
 function visibility(section){destroyVideo();clearTimeout(autoStartTimer);home.hidden=section!=='home';grid.hidden=section!=='grid';detail.hidden=section!=='detail';about.hidden=section!=='about';contact.hidden=section!=='contact';restart();if(section==='home'&&!interactionStarted&&!reduceMotion.matches&&featured.length>1)autoStartTimer=setTimeout(()=>{if(home.hidden||reduceMotion.matches||interactionStarted)return;interactionStarted=true;if(!focused&&!hovering){slide=(slide+1)%featured.length;updateSlide()}restart()},10000)}
+const singleColumnWorks=matchMedia('(max-width:430px)');
+let prominentWork=null,workUpdateFrame=0;
+function updateProminentWork(){
+  workUpdateFrame=0;
+  let closest=null,distance=Infinity;
+  if(singleColumnWorks.matches&&!grid.hidden){
+    const middle=window.innerHeight/2;
+    grid.querySelectorAll('.card').forEach(card=>{
+      const rect=card.getBoundingClientRect();
+      if(rect.bottom<=0||rect.top>=window.innerHeight)return;
+      const nextDistance=Math.abs((rect.top+rect.bottom)/2-middle);
+      if(nextDistance<distance){closest=card;distance=nextDistance}
+    });
+  }
+  if(prominentWork!==closest){prominentWork?.classList.remove('is-prominent');closest?.classList.add('is-prominent');prominentWork=closest}
+}
+function scheduleProminentWork(){if(!workUpdateFrame)workUpdateFrame=requestAnimationFrame(updateProminentWork)}
+window.addEventListener('scroll',scheduleProminentWork,{passive:true});
+window.addEventListener('resize',scheduleProminentWork);
 function render(){
   visibility('grid');grid.replaceChildren();
   const sections=[['installations','Video Installations'],['essay','Essay Films'],['single','Single Channel'],['photography','Photography']];
@@ -123,6 +152,7 @@ function render(){
     section.append(gallery);grid.append(section);
   }
   grid.append(renderPublications());
+  scheduleProminentWork();
 }
 function show(p){
   visibility('detail'); detail.replaceChildren();
@@ -139,7 +169,7 @@ function show(p){
   const facts=el('div',null,'project-facts');
   const sample=sampleDetails[`${p.category}/${p.id}`];
   const factValues=sample||[['Format',p.undertitle],['Details',p.undertitle2],['Duration',p.length]];
-  for(const [label,value] of factValues){if(!value||label.toLowerCase()==='year')continue;const row=el('div',null,'fact-row');let display=String(value).replace(/\bi\//g,'');if(label==='Duration')display=display.replace(/\bminutes?\b/gi,'m');row.append(el('span',label==='Duration'?'Work duration':label==='Format'?'Info':label,'fact-label'),el('span',display,'fact-value'));facts.append(row)}
+  for(const [label,value] of factValues){if(!value||label.toLowerCase()==='year')continue;const row=el('div',null,'fact-row');let display=String(value).replace(/\bi\//g,'');if(label==='Duration')display=display.replace(/\bminutes?\b/gi,'m');row.append(el('span',label==='Format'?'Info':label,'fact-label'),el('span',display,'fact-value'));facts.append(row)}
   const omitEmptyFacts=!facts.childNodes.length&&(p.category==='photography'||(p.category==='installations'&&['lamu-project','garden-of-the-broken-hearted'].includes(p.id)));
   if(!omitEmptyFacts) info.append(facts);
   const description=el('div',null,'project-description');

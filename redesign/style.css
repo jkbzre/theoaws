@@ -208,5 +208,26 @@ header .subtitle{margin-bottom:20px}
 
 .about-copy{text-align:justify}
 
+/* In the single-column mobile gallery, show only the work nearest the viewport centre. */
+@media(max-width:430px){
+  #grid .card .caption{opacity:0}
+  #grid .card.is-prominent .caption{opacity:1}
+}
+
 /* Keep both landing-page labels on one line, sharing available width. */
 .slide-info{display:flex;flex-wrap:nowrap;justify-content:space-between;gap:14px}.slide-info > [aria-hidden="true"]{display:none}.slide-info .slide-title,.slide-info .exhibition-note{white-space:nowrap;flex:none}.slide-info .slide-title{overflow-wrap:normal}
+.slide-info{font-size:12px}.slide-info .slide-title{white-space:normal;flex:0 1 auto;min-width:0}
+
+/* Mobile: exhibition notice sits below the year; information precedes galleries. */
+.slide-status-mobile{display:none}
+@media(max-width:700px){
+  .slide-info{position:relative}
+  .slide-info.has-on-view{padding-bottom:1.4em}
+  .slide-info.has-on-view .slide-status-desktop{display:none}
+  .slide-info.has-on-view .slide-status-mobile{display:block}
+  .slide-status-notice{position:absolute;right:0;bottom:0;white-space:nowrap}
+  .project-visual{display:contents}
+  .project-visual > .stream-player,.project-visual > .detail-image{order:1}
+  .project-info{order:2}
+  .project-visual > .project-body{order:3}
+}
