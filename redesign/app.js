@@ -12,6 +12,16 @@ import collectionData from './archive-data/collectionData.js';
 import prizeData from './archive-data/prizeData.js';
 import videoinstallationData from './archive-data/videoinstallationData.js';
 import interviewData from './archive-data/interviewData.js';
+// Preserve direct links from the previous site while using the new hash routes.
+const legacyPath=location.pathname.replace(/\/+$/, '');
+const legacyProject=legacyPath.match(/^\/videos\/(installations|essay|single)\/([^/]+)$/);
+const legacyPhoto=legacyPath.match(/^\/photography\/([^/]+)$/);
+let legacyHash='';
+if(legacyProject)legacyHash=`#work/${legacyProject[1]}/${legacyProject[2]}`;
+else if(legacyPhoto)legacyHash=`#work/photography/${legacyPhoto[1]}`;
+else if(legacyPath==='/garden-of-the-broken-hearted')legacyHash='#work/installations/garden-of-the-broken-hearted';
+else if(legacyPath==='/adieu')legacyHash='#work/installations/adieu';
+if(legacyHash)history.replaceState(null,'',`/${location.search}${location.hash||legacyHash}`);
 // Preview-only comparison: ?indicator=gap selects the moving gap.
 const indicator=new URLSearchParams(location.search).get('indicator');
 document.documentElement.dataset.slideIndicator=['gap','marker'].includes(indicator)?indicator:'progress';
